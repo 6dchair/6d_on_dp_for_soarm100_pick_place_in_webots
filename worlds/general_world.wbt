@@ -1,0 +1,223 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/containers/protos/CardboardBox.proto"
+EXTERNPROTO "../protos/so100.proto"
+EXTERNPROTO "../protos/table.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.23291610858261105 0.6397739257661984 0.7324202415774979 0.9226048687525684
+  position -0.7734132269646082 -0.7840982471758317 0.8747881309563804
+}
+TexturedBackground {
+  texture "empty_office"
+  luminosity 0.7
+  skybox FALSE
+  skyColor [
+    0.2 0.2 0.2
+  ]
+}
+TexturedBackgroundLight {
+}
+Floor {
+  rotation 1 0 0 0
+  size 0.5 0.75
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "../worlds/textures/floor_2.jpg"
+      ]
+    }
+    roughness 0.8
+    metalness 0
+  }
+}
+DEF WORK_TABLE Table {
+  translation 0.1 0 3e-06
+  rotation 1 0 0 1.5708
+  size 0.25 0.05 0.45
+  feetSize 0.03 0.03
+  frameThickness 0.03
+  trayAppearance PBRAppearance {
+    baseColor 0.964706 0.960784 0.956863
+    roughness 0.4
+    metalness 0
+  }
+  legAppearance PBRAppearance {
+    baseColor 0.964706 0.960784 0.956863
+    roughness 0.5
+    metalness 0
+  }
+}
+DEF TARGET_BOX CardboardBox {
+  translation 0.14125880253129577 -0.09948043370596271 0.07494377458846921
+  rotation 4.444414718497273e-06 -1.8409368534222108e-06 0.999999999988429 0.7853981634056304
+  name "target_box"
+  size 0.05 0.05 0.05
+  mass 0.15
+}
+DEF GOAL_ZONE Solid {
+  translation 0.06413088725491546 0.08179700203879717 0.0500635
+  children [
+    DEF GOAL_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.819608 0.478431
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.1 0.001
+      }
+      castShadows FALSE
+      isPickable FALSE
+    }
+  ]
+  name "goal_zone"
+  translationStep 1e-07
+}
+DEF WORKSPACE_VISUALIZATION Solid {
+  translation 0.1 0 0.051
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          emissiveColor 0 0 1
+        }
+      }
+      geometry IndexedLineSet {
+        coord Coordinate {
+          point [
+            -0.05000000000000001 -0.125 0
+            0.05000000000000001 -0.125 0
+            0.05000000000000001 0.125 0
+            -0.05000000000000001 0.125 0
+          ]
+        }
+        coordIndex [
+          0, 1, 2, 3, 0, -1
+        ]
+      }
+      castShadows FALSE
+      isPickable FALSE
+    }
+  ]
+  name "workspace_visualization"
+}
+DEF SO100 so100 {
+  hidden translation_1 -1.8458273523902155e-05 -2.5464872731695287e-05 -0.00031098938765523193
+  hidden rotation_1 0.9541319414153072 0.29645324826448416 -0.041805621206876635 3.452831258083319e-05
+  hidden position_1_0 0.11851835505574165
+  hidden rotation_2 0.9964985663839244 0.05912090563686124 0.05912127968388911 1.5742975708281954
+  hidden position_2_0 2.1251082073122545e-06
+  hidden rotation_3 -1 0 0 1.7999978748918044
+  hidden position_3_0 2.121067868911557e-07
+  hidden rotation_4 1 0 0 1.570790212106788
+  hidden position_4_0 -2.496877132945843
+  hidden rotation_5 -1 0 0 3.496877132945824
+  hidden position_5_0 -0.0061302516925161995
+  hidden translation_6 0.000377250954187012 -0.060411325431400514 -0.0003292663014877063
+  hidden rotation_6 1.3138572559278489e-06 0.9999999998542336 1.702370144095968e-05 1.5646606596530268
+  hidden position_6_0 -0.19999989363130627
+  hidden translation_7 -0.017337329755462594 -0.03210295922122349 0.00038192003194267545
+  hidden rotation_7 -0.09984497589048288 0.9950030021545554 -8.057822949072953e-05 3.1415597658815932
+  translation -0.14 -0.00999985 0
+  rotation 0 0 1 1.5708
+  controller "auto_14d"
+  supervisor TRUE
+}
+DEF CAMERA_ROBOT_1 Robot {
+  translation 0.0953313 0.013505 0.475717
+  rotation -0.5764778848548953 -0.5703628860762988 0.5851148831297501 -2.070775307179586
+  children [
+    Camera {
+      rotation 1 0 0 -1.5708
+      name "top_down_cam"
+      fieldOfView 1
+      width 640
+      height 480
+      near 0.1
+      far 1
+      antiAliasing TRUE
+      bloomThreshold 1.5
+    }
+    Pose {
+      translation 0 0 -0.3
+      children [
+        Shape {
+          castShadows FALSE
+          isPickable FALSE
+        }
+      ]
+    }
+  ]
+  name "top_down_cam_robot"
+  translationStep 0.0001
+  rotationStep 1e-07
+  controller "top_down_cam_supervisor"
+  supervisor TRUE
+}
+DEF CAMERA_ROBOT_2 Robot {
+  translation -0.345194 0.0618523 0.228106
+  rotation 0.9929865818906756 0.024389989730292116 -0.11568395128983654 1.56149
+  children [
+    Camera {
+      rotation 1 0 0 -1.5708
+      name "back_cam"
+      fieldOfView 1
+      width 640
+      height 480
+      near 0.1
+      far 1
+      antiAliasing TRUE
+      bloomThreshold 1.5
+    }
+    Pose {
+      translation 0 0 -0.3
+      children [
+        Shape {
+          castShadows FALSE
+          isPickable FALSE
+        }
+      ]
+    }
+  ]
+  name "back_cam_robot"
+  translationStep 0.0001
+  rotationStep 1e-07
+  controller "back_cam_supervisor"
+  supervisor TRUE
+}
+DEF CAMERA_ROBOT_3 Robot {
+  translation 0.487862 -0.0304652 0.218781
+  rotation -0.05160528373161516 0.6992707795573374 0.7129917752318415 2.98437
+  children [
+    Camera {
+      rotation 1 0 0 -1.5708
+      name "front_cam"
+      fieldOfView 1
+      width 640
+      height 480
+      near 0.1
+      far 1
+      antiAliasing TRUE
+      bloomThreshold 1.5
+    }
+    Pose {
+      translation 0 0 -0.3
+      children [
+        Shape {
+          castShadows FALSE
+          isPickable FALSE
+        }
+      ]
+    }
+  ]
+  name "front_cam_robot"
+  translationStep 0.0001
+  rotationStep 1e-07
+  controller "front_cam_supervisor"
+  supervisor TRUE
+}
