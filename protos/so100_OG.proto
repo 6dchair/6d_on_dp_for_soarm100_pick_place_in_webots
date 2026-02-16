@@ -1,0 +1,331 @@
+#VRML_SIM R2025a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the so100
+# Extracted from: /home/gd/SO-ARM100/Simulation/SO100/so100.urdf
+
+PROTO so100 [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "so100"  # Is `Robot.name`.
+  field  SFString    controller      "void"   # Is `Robot.controller`.
+  field  MFString    controllerArgs  []       # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""       # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE    # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE     # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE    # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      Shape {
+        appearance DEF 3d_printed PBRAppearance {
+          baseColor 0.500000 0.500000 0.500000
+          roughness 1.000000
+          metalness 0
+        }
+        geometry DEF Base Mesh {
+          url "SO-ARM100/Simulation/SO100/assets/Base.stl"
+        }
+      }
+      Shape {
+        appearance DEF sts3215 PBRAppearance {
+          baseColor 0.500000 0.500000 0.500000
+          roughness 1.000000
+          metalness 0
+        }
+        geometry DEF Base_Motor Mesh {
+          url "SO-ARM100/Simulation/SO100/assets/Base_Motor.stl"
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 0.000006 1.000000
+          anchor 0.000000 -0.045200 0.016500
+        }
+        device [
+          RotationalMotor {
+            name "shoulder_pan"
+            maxVelocity 1.0
+            minPosition -2.0
+            maxPosition 2.0
+            maxTorque 35.0
+          }
+          PositionSensor {
+            name "shoulder_pan_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 -0.045200 0.016500
+          rotation 1.000000 0.000000 0.000000 1.570790
+          children [
+            Shape {
+              appearance USE 3d_printed
+              geometry DEF Rotation_Pitch Mesh {
+                url "SO-ARM100/Simulation/SO100/assets/Rotation_Pitch.stl"
+              }
+            }
+            Shape {
+              appearance USE sts3215
+              geometry DEF Rotation_Pitch_Motor Mesh {
+                url "SO-ARM100/Simulation/SO100/assets/Rotation_Pitch_Motor.stl"
+              }
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                anchor 0.000000 0.102500 0.030600
+              }
+              device [
+                RotationalMotor {
+                  name "shoulder_lift"
+                  maxVelocity 1.0
+                  maxPosition 3.5
+                  maxTorque 35.0
+                }
+                PositionSensor {
+                  name "shoulder_lift_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.000000 0.102500 0.030600
+                rotation -1.000000 0.000000 0.000000 1.800000
+                children [
+                  Shape {
+                    appearance USE 3d_printed
+                    geometry DEF Upper_Arm Mesh {
+                      url "SO-ARM100/Simulation/SO100/assets/Upper_Arm.stl"
+                    }
+                  }
+                  Shape {
+                    appearance USE sts3215
+                    geometry DEF Upper_Arm_Motor Mesh {
+                      url "SO-ARM100/Simulation/SO100/assets/Upper_Arm_Motor.stl"
+                    }
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      anchor 0.000000 0.112570 0.028000
+                    }
+                    device [
+                      RotationalMotor {
+                        name "elbow_flex"
+                        maxVelocity 1.0
+                        minPosition -3.14158
+                        maxTorque 35.0
+                      }
+                      PositionSensor {
+                        name "elbow_flex_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.000000 0.112570 0.028000
+                      rotation 1.000000 0.000000 0.000000 1.570790
+                      children [
+                        Shape {
+                          appearance USE 3d_printed
+                          geometry DEF Lower_Arm Mesh {
+                            url "SO-ARM100/Simulation/SO100/assets/Lower_Arm.stl"
+                          }
+                        }
+                        Shape {
+                          appearance USE sts3215
+                          geometry DEF Lower_Arm_Motor Mesh {
+                            url "SO-ARM100/Simulation/SO100/assets/Lower_Arm_Motor.stl"
+                          }
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            anchor 0.000000 0.005200 0.134900
+                          }
+                          device [
+                            RotationalMotor {
+                              name "wrist_flex"
+                              maxVelocity 1.0
+                              minPosition -2.5
+                              maxPosition 1.2
+                              maxTorque 35.0
+                            }
+                            PositionSensor {
+                              name "wrist_flex_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.000000 0.005200 0.134900
+                            rotation -1.000000 0.000000 0.000000 1.000000
+                            children [
+                              Shape {
+                                appearance USE 3d_printed
+                                geometry DEF Wrist_Pitch_Roll Mesh {
+                                  url "SO-ARM100/Simulation/SO100/assets/Wrist_Pitch_Roll.stl"
+                                }
+                              }
+                              Shape {
+                                appearance USE sts3215
+                                geometry DEF Wrist_Pitch_Roll_Motor Mesh {
+                                  url "SO-ARM100/Simulation/SO100/assets/Wrist_Pitch_Roll_Motor.stl"
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0.000000 1.000000 0.000000
+                                  anchor 0.000000 -0.060100 0.000000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wrist_roll"
+                                    maxVelocity 1.0
+                                    minPosition -3.14158
+                                    maxPosition 3.14158
+                                    maxTorque 35.0
+                                  }
+                                  PositionSensor {
+                                    name "wrist_roll_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.000000 -0.060100 0.000000
+                                  rotation 0.000000 1.000000 0.000000 1.570790
+                                  children [
+                                    Shape {
+                                      appearance USE 3d_printed
+                                      geometry DEF Fixed_Jaw Mesh {
+                                        url "SO-ARM100/Simulation/SO100/assets/Fixed_Jaw.stl"
+                                      }
+                                    }
+                                    Shape {
+                                      appearance USE sts3215
+                                      geometry DEF Fixed_Jaw_Motor Mesh {
+                                        url "SO-ARM100/Simulation/SO100/assets/Fixed_Jaw_Motor.stl"
+                                      }
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        axis 0.000013 0.000000 -1.000000
+                                        anchor -0.020200 -0.024400 0.000000
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "gripper"
+                                          maxVelocity 1.0
+                                          minPosition -0.2
+                                          maxPosition 2.0
+                                          maxTorque 35.0
+                                        }
+                                        PositionSensor {
+                                          name "gripper_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation -0.020200 -0.024400 0.000000
+                                        rotation 0.000000 1.000000 0.000000 3.141580
+                                        children [
+                                          Shape {
+                                            appearance USE 3d_printed
+                                            geometry DEF Moving_Jaw Mesh {
+                                              url "SO-ARM100/Simulation/SO100/assets/Moving_Jaw.stl"
+                                            }
+                                          }
+                                        ]
+                                        name "jaw"
+                                        physics Physics {
+                                          density -1
+                                          mass 0.020244
+                                          centerOfMass [ -0.001617 -0.030347 0.000450 ]
+                                          inertiaMatrix [
+                                            1.112650e-05 8.996510e-06 2.995480e-06
+                                            0.000000e+00 0.000000e+00 0.000000e+00
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "gripper"
+                                  physics Physics {
+                                    density -1
+                                    mass 0.092986
+                                    centerOfMass [ 0.005524 -0.028017 0.000484 ]
+                                    inertiaMatrix [
+                                      5.031360e-05 4.640980e-05 2.729610e-05
+                                      0.000000e+00 0.000000e+00 0.000000e+00
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "wrist"
+                            boundingObject USE Wrist_Pitch_Roll
+                            physics Physics {
+                              density -1
+                              mass 0.066132
+                              centerOfMass [ -0.008527 -0.035228 -0.000023 ]
+                              inertiaMatrix [
+                                3.454030e-05 2.390410e-05 1.947040e-05
+                                0.000000e+00 0.000000e+00 0.000000e+00
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "lower_arm"
+                      boundingObject USE Lower_Arm
+                      physics Physics {
+                        density -1
+                        mass 0.147968
+                        centerOfMass [ -0.003396 0.001378 0.076801 ]
+                        inertiaMatrix [
+                          1.388030e-04 1.077480e-04 4.842420e-05
+                          0.000000e+00 0.000000e+00 0.000000e+00
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "upper_arm"
+                boundingObject USE Upper_Arm
+                physics Physics {
+                  density -1
+                  mass 0.162409
+                  centerOfMass [ -0.000017 0.070180 0.003105 ]
+                  inertiaMatrix [
+                    2.133120e-04 1.671640e-04 7.015220e-05
+                    0.000000e+00 0.000000e+00 0.000000e+00
+                  ]
+                }
+              }
+            }
+          ]
+          name "shoulder"
+          boundingObject USE Rotation_Pitch
+          physics Physics {
+            density -1
+            mass 0.119226
+            centerOfMass [ -0.000091 0.059097 0.031089 ]
+            inertiaMatrix [
+              5.942780e-05 5.899750e-05 3.137120e-05
+              0.000000e+00 0.000000e+00 0.000000e+00
+            ]
+          }
+        }
+      }
+    ]
+    name IS name
+    boundingObject USE Base
+    physics Physics {
+      density -1
+      mass 1.000000
+      centerOfMass [ 0.000000 0.000000 0.000000 ]
+      inertiaMatrix [
+        1.000000e-02 1.000000e-02 1.000000e-02
+        0.000000e+00 0.000000e+00 0.000000e+00
+      ]
+    }
+  }
+}

@@ -1,0 +1,344 @@
+# to address instability in simulation, the original PROTO was substantially modified. 
+# the robot hierarchy was restructured by wrapping all components in a parent Solid node, 
+# and the detailed physics properties (mass, center of mass, inertia matrices) were replaced with simplified approximations
+# or removed entirely. these modifications stabilized the arm but altered its dynamic behavior from the original specifications. 
+# visual-wise, the colors are modified. 
+# the original .proto (so100_OG.proto) file is in the same folder
+
+#VRML_SIM R2025a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the so100
+# Extracted from: /home/gd/SO-ARM100/Simulation/SO100/so100.urdf
+
+PROTO so100 [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "so100"
+  field  SFString    controller      "extern"
+  field  MFString    controllerArgs  []
+  field  SFString    customData      ""
+  field  SFBool      supervisor      FALSE
+  field  SFBool      synchronization TRUE
+  field  SFBool      selfCollision   TRUE
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    name IS name
+
+    children [
+      Solid {
+        translation -1.84492466090698e-05 -2.5536716928148406e-05 -0.0002067684127083809
+        rotation 0.9495989874797706 0.3101788556505956 -0.04528620634013582 3.1872294430609954e-05
+        children [
+          Shape {
+            appearance DEF three_d_printed PBRAppearance {
+              baseColor 1 1 1
+              roughness 0.4
+              metalness 0
+            }
+            geometry Mesh { url "assets/Base.stl" }
+          }
+          Shape {
+            appearance DEF sts3215 PBRAppearance {
+              baseColor 0.1 0.1 0.1
+              roughness 0.8
+              metalness 0
+            }
+            geometry Mesh { url "assets/Base_Motor.stl" }
+          }     
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 0.8921170186569828
+              axis 0 0 1
+              anchor 0 -0.0452 0.0165
+            }
+            device [
+              RotationalMotor {
+                name "1"
+                maxVelocity 1
+                minPosition -2
+                maxPosition 2
+                maxTorque 35
+              }
+              PositionSensor { name "1_sensor" }
+            ]
+            endPoint Solid {
+              translation 0 -0.0452 0.0165
+              rotation 0.8283553646693865 0.3961220798579136 0.39612458604899564 1.7579999229822485
+              children [
+                Shape {
+                  appearance USE three_d_printed
+                  geometry Mesh { url "assets/Rotation_Pitch.stl" }
+                }
+                Shape {
+                  appearance USE sts3215
+                  geometry Mesh { url "assets/Rotation_Pitch_Motor.stl" }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position 1.9634528763264023
+                    anchor 0 0.1025 0.0306
+                  }
+                  device [
+                    RotationalMotor {
+                      name "2"
+                      maxVelocity 1
+                      maxPosition 3.5
+                      maxTorque 35
+                    }
+                    PositionSensor { name "2_sensor" }
+                  ]
+                  endPoint Solid {
+                    translation 0 0.1025 0.0306
+                    rotation 1 0 0 0.163452876326389
+                    children [
+                      Shape {
+                        appearance USE three_d_printed
+                        geometry Mesh { url "assets/Upper_Arm.stl" }
+                      }
+                      Shape {
+                        appearance USE sts3215
+                        geometry Mesh { url "assets/Upper_Arm_Motor.stl" }
+                      }
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          position -2.3252018772081002
+                          anchor 0 0.11257 0.028
+                        }
+                        device [
+                          RotationalMotor {
+                            name "3"
+                            maxVelocity 1
+                            minPosition -3.14158
+                            maxTorque 35
+                          }
+                          PositionSensor { name "3_sensor" }
+                        ]
+                        endPoint Solid {
+                          translation 0 0.11257 0.028
+                          rotation -0.9999999999999999 0 0 0.7544118772080954
+                          children [
+                            Shape {
+                              appearance USE three_d_printed
+                              geometry Mesh { url "assets/Lower_Arm.stl" }
+                            }
+                            Shape {
+                              appearance USE sts3215
+                              geometry Mesh { url "assets/Lower_Arm_Motor.stl" }
+                            }
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position 0.7404252988860591
+                                anchor 0 0.0052 0.1349
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "4"
+                                  maxVelocity 1
+                                  minPosition -2.5
+                                  maxPosition 1.2000002817198385
+                                  maxTorque 35
+                                }
+                                PositionSensor { name "4_sensor" }
+                              ]
+                              endPoint Solid {
+                                translation 0 0.0052 0.1349
+                                rotation -1 0 0 0.25957470111392733
+                                children [
+                                  Shape {
+                                    appearance USE three_d_printed
+                                    geometry Mesh { url "assets/Wrist_Pitch_Roll.stl" }
+                                  }
+                                  Shape {
+                                    appearance USE sts3215
+                                    geometry Mesh { url "assets/Wrist_Pitch_Roll_Motor.stl" }
+                                  }
+                                  HingeJoint {
+                                    jointParameters HingeJointParameters {
+                                      position 0.028750886463534932
+                                      axis 0 1 0
+                                      anchor 0 -0.0601 0
+                                    }
+                                    device [
+                                      RotationalMotor {
+                                        name "5"
+                                        maxVelocity 1
+                                        minPosition -3.14158
+                                        maxPosition 3.14158
+                                        maxTorque 35
+                                      }
+                                      PositionSensor { name "5_sensor" }
+                                    ]
+                                    endPoint Solid {
+                                      translation 0.00036553862350484497 -0.060411325431400514 -0.0003422222880768942
+                                      rotation 1.5830090888100806e-06 0.9999999998591756 1.6707572028524474e-05 1.599541797804081
+                                      children [
+                                        Shape {
+                                          appearance USE three_d_printed
+                                          geometry Mesh { url "assets/Fixed_Jaw.stl" }
+                                        }
+                                        Shape {
+                                          appearance USE sts3215
+                                          geometry Mesh { url "assets/Fixed_Jaw_Motor.stl" }
+                                        }
+                                        HingeJoint {
+                                          jointParameters HingeJointParameters {
+                                            position -2.7034544603093526e-07
+                                            axis 0 0 -1
+                                            anchor -0.0202 -0.0244 0
+                                          }
+                                          device [
+                                            RotationalMotor {
+                                              name "6"
+                                              maxVelocity 1
+                                              minPosition -0.2
+                                              maxPosition 2
+                                              maxTorque 35
+                                            }
+                                            PositionSensor { name "6_sensor" }
+                                          ]
+                                          endPoint Solid {
+                                            translation -0.01892473126535324 -0.03251813718455313 0.00038192003194267583
+                                            rotation -1.1805971242005018e-05 0.9999999965832728 -8.181731853690015e-05 3.1415760189522404
+                                            children [
+                                              Shape {
+                                                appearance PBRAppearance {
+                                                  baseColor 0 0 1
+                                                  roughness 1.000000
+                                                  metalness 0
+                                                }
+                                                geometry Mesh { url "assets/Moving_Jaw.stl" }
+                                              }
+                                            ]
+                                            name "jaw"
+                                            boundingObject Group {
+                                              children [
+                                                Pose {
+                                                  translation -0.00742 -0.07645 0
+                                                  rotation 0 0 1 0.00602
+                                                  children [
+                                                    Box { size 0.01 0.01 0.01 }
+                                                  ]
+                                                  translationStep 1e-05
+                                                  rotationStep 1e-05
+                                                }
+                                                Pose {
+                                                  translation -0.005725 -0.066814 0
+                                                  children [
+                                                    Box { size 0.009 0.009 0.014 }
+                                                  ]
+                                                  translationStep 1e-06
+                                                  rotationStep 1e-05
+                                                }
+                                                Pose {
+                                                  translation -0.0011 -0.0427 0
+                                                  children [
+                                                    Box { size 0.014 0.038 0.022 }
+                                                  ]
+                                                  translationStep 0.0001
+                                                  rotationStep 0.0001
+                                                }
+                                              ]
+                                            }
+                                            physics Physics {
+                                              density -1
+                                              mass 0.15
+                                            }
+                                          }
+                                        }
+                                      ]
+                                      name "gripper"
+                                      boundingObject Group {
+                                        children [
+                                          Pose {
+                                            translation 0.01135 -0.10115 0
+                                            children [
+                                              Box { size 0.007 0.009 0.013 }
+                                            ]
+                                            translationStep 1e-05
+                                            rotationStep 1e-06
+                                          }
+                                          Pose {
+                                            translation 0.01551 -0.09144 0
+                                            children [
+                                              Box { size 0.011 0.009 0.013 }
+                                            ]
+                                            translationStep 1e-05
+                                            rotationStep 1e-05
+                                          }
+                                          Pose {
+                                            translation 0.0189 -0.0757 0
+                                            rotation 1 0 0 -0.0033853071795864054
+                                            children [
+                                              Box { size 0.015 0.019 0.017 }
+                                            ]
+                                            translationStep 0.0001
+                                            rotationStep 1e-05
+                                          }
+                                          Pose {
+                                            translation 0.0232 -0.0557 0
+                                            children [
+                                              Box { size 0.02 0.018 0.025 }
+                                            ]
+                                            translationStep 0.0001
+                                            rotationStep 0.0001
+                                          }
+                                        ]
+                                      }
+                                      physics Physics {
+                                        density -1
+                                        mass 0.15
+                                      }
+                                    }
+                                  }
+                                ]
+                                name "wrist"
+                                boundingObject Shape {
+                                  geometry Mesh { url "assets/simplified/Wrist_Pitch_Roll.stl" }
+                                }
+                                physics Physics { }
+                              }
+                            }
+                          ]
+                          name "lower_arm"
+                          boundingObject Shape {
+                            geometry Mesh { url "assets/simplified/Lower_Arm.stl" }
+                          }
+                          physics Physics { }
+                        }
+                      }
+                    ]
+                    name "upper_arm"
+                    boundingObject Shape {
+                      geometry Mesh { url "assets/simplified/Upper_Arm.stl" }
+                    }
+                    physics Physics { }
+                  }
+                }
+              ]
+              name "shoulder"
+              boundingObject Shape {
+                geometry Mesh { url "assets/simplified/Rotation_Pitch.stl" }
+              }
+              physics Physics { }
+            }
+          }
+        ]
+        name "base"
+        boundingObject Shape {
+          geometry Mesh { url "assets/simplified/Base.stl" }
+        }
+        physics Physics { }
+      }
+    ]
+  }
+}
