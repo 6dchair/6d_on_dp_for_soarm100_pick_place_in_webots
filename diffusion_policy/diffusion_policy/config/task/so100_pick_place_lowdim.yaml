@@ -1,0 +1,25 @@
+name: so100_pick_place_lowdim
+
+shape_meta:
+  obs:
+    state:
+      shape: [14]
+      type: low_dim
+  action:
+    shape: [6]
+    type: low_dim
+
+obs_dim: 14
+action_dim: 6
+keypoint_dim: 0
+
+dataset:
+  _target_: diffusion_policy.dataset.so100_zarr_dataset_lowdim.SO100ZarrDataset
+  path: data/so100_lowdim/300_eps.zarr
+  horizon: 16
+  pad_before: ${eval:${n_obs_steps}-1}
+  pad_after: ${eval:${n_action_steps}-1}
+  validation_split: 0.2
+  mode: train
+
+env_runner: null
