@@ -146,28 +146,6 @@ Object and goal positions were randomized within a 0.10 m × 0.25 m bounded regi
 
 ---
 
-## Utility Scripts
-
-### `dataset_analyzer.py`
-Inspect dataset statistics, episode lengths, and state/action distributions from a Zarr file.
-```bash
-python utility_scripts/dataset_analyzer.py --dataset ./dataset.zarr
-```
-
-### `merge_zarrs.py`
-Merge multiple per-session Zarr datasets (collected across separate sittings) into a single unified file.
-```bash
-python utility_scripts/merge_zarrs.py --input_dir ./sessions/ --output ./dataset.zarr
-```
-
-### `mesh_decimator.py`
-Reduce STL mesh polygon count for smoother import into Webots. Used during SO-ARM100 PROTO conversion.
-```bash
-python utility_scripts/mesh_decimator.py --input model.stl --output model_decimated.stl --ratio 0.3
-```
-
----
-
 ## Notes on the SO-ARM100 PROTO
 
 The SO-ARM100 PROTO included in this repo is a **modified version** of the original from [TheRobotStudio/SO-ARM100](https://github.com/TheRobotStudio/SO-ARM100). Modifications were necessary to stabilize the arm in Webots:
