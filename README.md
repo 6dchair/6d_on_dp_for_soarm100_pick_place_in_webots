@@ -186,7 +186,7 @@ Also cite the original Diffusion Policy paper:
 
 ## Acknowledgments
 
-This project was conducted at the AI and Robotics Laboratory (AIRLab), Caraga State University, under the supervision of Engr. Rudolph Joshua U. Candare. The training pipeline is adapted from the official [Diffusion Policy repository](https://github.com/real-stanford/diffusion_policy) by Stanford and Toyota Research Institute.
+This project was conducted at the AI and Robotics Laboratory (AIRLab), Caraga State University, under the supervision of Professor Rudolph Joshua U. Candare. The training pipeline is adapted from the official [Diffusion Policy repository](https://github.com/real-stanford/diffusion_policy) by Stanford and Toyota Research Institute.
 
 ---
 
