@@ -1,6 +1,4 @@
 # Sim-to-Sim Transfer of Low-Dimensional Diffusion Policy for SO-ARM100 Pick-and-Place Using Webots Demonstrations
-
-**Pick-and-Place Using Webots Demonstrations**
 > February 2026
 
 ---
